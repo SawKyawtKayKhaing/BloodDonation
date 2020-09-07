@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\donar;
+
+use App\blood;
 use Illuminate\Http\Request;
-use Illuminate\Facades\DB;
-class DonarController extends Controller
+use Illuminate\Support\Facades\DB;
+class BloodController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +14,9 @@ class DonarController extends Controller
      */
     public function index()
     {
-        //
-        $donars=donar::all();
-        return view('donar.index',['donars'=>$donars]);
+        //    
+            $bloods=blood::all();
+        return view('blood.index',['bloods'=>$bloods]);
     }
 
     /**
@@ -26,7 +27,7 @@ class DonarController extends Controller
     public function create()
     {
         //
-        return view('donar.create');
+        return view('blood.create');
     }
 
     /**
@@ -38,25 +39,20 @@ class DonarController extends Controller
     public function store(Request $request)
     {
         //
-        $donars=new donar();
-        $donars->name = $request->name;
-        $donars->gender=$request->gender;
-        $donars->address=$request->address;
-        $donars->phone=$request->phone;
-        $donars->age=$request->age;
-        $donars->date_of_birth=$request->dob;
-        $donars->member=$request->member;
-        $donars->save();
-        return redirect()->action('/donars');
+        $bloods=new blood();
+        $bloods->blood_group = $request->blood;
+        $bloods->bag_number = $request->bag;
+        $bloods->save();
+        return redirect()->action('/bloods');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\blood  $blood
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(blood $blood)
     {
         //
     }
@@ -64,49 +60,44 @@ class DonarController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\blood  $blood
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
-        $donars=donar::find($id);
-        return view('donar.edit',['donar'=>donar::get(),'donars'=>$donars]);
+        $bloods=blood::find($id);
+        return view('blood.edit',['blood'=>blood::get(),'bloods'=>$bloods]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\blood  $blood
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //
-        $donars=donar::find($id);
-        $donars->name = $request->name;
-        $donars->gender=$request->gender;
-        $donars->address=$request->address;
-        $donars->phone=$request->phone;
-        $donars->age=$request->age;
-        $donars->date_of_birth=$request->dob;
-        $donars->member=$request->member;
-        $donars->save();
-        return redirect('donars');
+        $bloods=blood::find($id);
+        $bloods->blood_group = $request->blood;
+        $bloods->bag_number=$request->bag_number;
+        $bloods->save();
+        return redirect('bloods');
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\blood  $blood
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
-        donar::findOrFail($id)->delete();
-        return redirect('donars');
+        blood::findOrFail($id)->delete();
+        return redirect('bloods');
     }
 }

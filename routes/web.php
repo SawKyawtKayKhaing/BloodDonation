@@ -21,3 +21,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('donars','DonarController');
+Route::resource('organizations','OrganizationController');
+Route::resource('admins','AdminController');
+Route::resource('members','MemberController');
+Route::resource('neededbloods','NeededBloodController');
+Route::resource('bloods','BloodController');
+Route::resource('hospitals','HospitalController');
+Route::resource('labs','LabController');
+Route::resource('accepts','AcceptController');

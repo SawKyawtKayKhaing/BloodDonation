@@ -9,9 +9,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </head>
-<form action="{{ route('donars.update', $donars->id) }}" method="post">
-@method('PUT')
-@csrf
+<form action="/members" method="POST" class="form-horizontal">
+{{ csrf_field() }}
+
 
 <div>
 <div class="form-group">
@@ -40,14 +40,26 @@
     <input type="text" id="name"  name="dob" placeholder="Enter Date Of Birth">
 </div>
 <div class="form-group">
-    <label for="mem">Member</label>&nbsp;&nbsp;
-    <select name="member">
-        <option>member</option>
-        <option>other</option>
+    <label for="org_id">Organization_Id</label>
+    <select  id="org_id" name="organization_id">
+        <option>Select ID</option>
+            @foreach($organizations as $organization)
+            <option value="{{$organization->id}}">{{$organization->quantity}}</option>
+            @endforeach
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="donar_id">Donar_Id</label>
+    <select  id="donar_id" name="donar_id">
+        <option>Select ID</option>
+            @foreach($donars as $donar)
+            <option value="{{$donar->id}}">{{$donar->name}}</option>
+            @endforeach
     </select>
 </div>
 <div>
-<button type="submit" class="btn btn-info">Edit</button>
+<button type="submit" class="btn btn-info">Confirm</button>
 </div>
 </div>
 </form>

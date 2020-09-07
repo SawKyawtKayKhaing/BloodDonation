@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\donar;
+use App\admin;
+use App\organization;
 use Illuminate\Http\Request;
 use Illuminate\Facades\DB;
-class DonarController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class DonarController extends Controller
     public function index()
     {
         //
-        $donars=donar::all();
-        return view('donar.index',['donars'=>$donars]);
+        $admins=admin::all();
+        return view('admin.index',['admins'=>$admins]);
     }
 
     /**
@@ -26,7 +27,8 @@ class DonarController extends Controller
     public function create()
     {
         //
-        return view('donar.create');
+        $organizations=organization::get();
+        return view('admin.create',['organizations'=>$organizations]);
     }
 
     /**
@@ -38,16 +40,13 @@ class DonarController extends Controller
     public function store(Request $request)
     {
         //
-        $donars=new donar();
-        $donars->name = $request->name;
-        $donars->gender=$request->gender;
-        $donars->address=$request->address;
-        $donars->phone=$request->phone;
-        $donars->age=$request->age;
-        $donars->date_of_birth=$request->dob;
-        $donars->member=$request->member;
-        $donars->save();
-        return redirect()->action('/donars');
+        $admins=new admin();
+        $admins->name = $request->name;
+        $admins->address=$request->address;
+        $admins->phone=$request->phone;
+        $admins->organization_id=$request->organization_id;
+        $admins->save();
+        return redirect()->action('/admins');
     }
 
     /**
@@ -70,8 +69,9 @@ class DonarController extends Controller
     public function edit($id)
     {
         //
-        $donars=donar::find($id);
-        return view('donar.edit',['donar'=>donar::get(),'donars'=>$donars]);
+        $admins=admin::find($id);
+        $organizations=organization::get();
+        return view('admin.edit',compact('admins','organizations'));
     }
 
     /**
@@ -84,17 +84,13 @@ class DonarController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $donars=donar::find($id);
-        $donars->name = $request->name;
-        $donars->gender=$request->gender;
-        $donars->address=$request->address;
-        $donars->phone=$request->phone;
-        $donars->age=$request->age;
-        $donars->date_of_birth=$request->dob;
-        $donars->member=$request->member;
-        $donars->save();
-        return redirect('donars');
-
+        $admins=new admin();
+        $admins->name = $request->name;
+        $admins->address=$request->address;
+        $admins->phone=$request->phone;
+        $admins->organization_id=$request->organization_id;
+        $admins->save();
+        return redirect('admins');
     }
 
     /**
@@ -106,7 +102,7 @@ class DonarController extends Controller
     public function destroy($id)
     {
         //
-        donar::findOrFail($id)->delete();
-        return redirect('donars');
+        admin::findOrFail($id)->delete();
+        return redirect('admins');
     }
 }
