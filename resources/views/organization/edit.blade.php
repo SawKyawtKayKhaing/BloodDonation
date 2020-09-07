@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,19 +10,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </head>
-<form action="{{ route('donars.update', $donars->id) }}" method="post">
+<form action="{{route('organizations.update',$organizations->id)}}" method="POST" class="form-horizontal">
 @method('PUT')
 @csrf
+
 
 <div>
 <div class="form-group">
     <label for="name">Name:</label>&nbsp;&nbsp;
     <input type="text" id="name"   name="name"   placeholder="Enter Name">
-</div>
-<div class="form-group">
-    <label for="name">Gender:</label>&nbsp;&nbsp;
-    <input type="radio" id="name" name="gender">Female
-    <input type="radio" id="name" name="gender">Male
 </div>
 <div class="form-group">
     <label for="name">Address:</label>&nbsp;&nbsp;
@@ -31,24 +28,34 @@
     <label for="name">Phone:</label>&nbsp;&nbsp;
     <input type="text" id="name"  name="phone" placeholder="Enter Phone Number">
 </div>
+
 <div class="form-group">
-    <label for="name">Age:</label>&nbsp;&nbsp;
-    <input type="text" id="name"  name="age" placeholder="Enter Age">
-</div>
-<div class="form-group">
-    <label for="name">Date_of_Birth:</label>&nbsp;&nbsp;
-    <input type="text" id="name"  name="dob" placeholder="Enter Date Of Birth">
-</div>
-<div class="form-group">
-    <label for="mem">Member</label>&nbsp;&nbsp;
-    <select name="member">
-        <option>member</option>
-        <option>other</option>
+    <label for="request_id">NeededBlood_Id</label>
+    <select  id="request_id" name="neededblood_id">
+        <option>Select ID</option>
+            @foreach($neededbloods as $neededblood)
+            <option value="{{$neededblood->id}}">{{$neededblood->quantity}}</option>
+            @endforeach
     </select>
 </div>
+
+<div class="form-group">
+    <label for="donar_id">Donar_Id</label>
+    <select  id="donar_id" name="donar_id">
+        <option>Select ID</option>
+            @foreach($donars as $donar)
+            <option value="{{$donar->id}}">{{$donar->name}}</option>
+            @endforeach
+    </select>
+</div>
+
 <div>
-<button type="submit" class="btn btn-info">Edit</button>
+<button type="submit" class="btn btn-info">Confirm</button>
 </div>
 </div>
 </form>
 </html>
+
+
+
+

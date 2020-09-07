@@ -16,7 +16,7 @@
 <div>
 <div class="form-group">
     <label for="name">Name:</label>&nbsp;&nbsp;
-    <input type="text" id="name" class="form-control"  name="name"   placeholder="Enter Name">
+    <input type="text" id="name"   name="name"   placeholder="Enter Name">
 </div>
 <div class="form-group">
     <label for="name">Gender:</label>&nbsp;&nbsp;
@@ -25,26 +25,31 @@
 </div>
 <div class="form-group">
     <label for="name">Address:</label>&nbsp;&nbsp;
-    <textarea id="name" class="form-control" name="address" placeholder="Enter Address"></textarea>
+    <textarea id="name"  name="address" placeholder="Enter Address"></textarea>
 </div>
 <div class="form-group">
     <label for="name">Phone:</label>&nbsp;&nbsp;
-    <input type="text" id="name" class="form-control" name="phone" placeholder="Enter Phone Number">
+    <input type="text" id="name"  name="phone" placeholder="Enter Phone Number">
 </div>
 <div class="form-group">
     <label for="name">Age:</label>&nbsp;&nbsp;
-    <input type="text" id="name" class="form-control" name="age" placeholder="Enter Age">
+    <input type="text" id="name"  name="age" placeholder="Enter Age">
 </div>
 <div class="form-group">
     <label for="name">Date_of_Birth:</label>&nbsp;&nbsp;
-    <input type="text" id="name" class="form-control" name="dob" placeholder="Enter Date Of Birth">
+    <input type="date" id="name"  name="dob" placeholder="Enter Date Of Birth">
 </div>
+
 <div class="form-group">
     <label for="mem">Member</label>&nbsp;&nbsp;
-    <select name="member">
-        <option>member</option>
-        <option>other</option>
+    <select  id="mem" name="member">
+        <option value="member">member</option>
+        <option value="other">other</option>
     </select>
+</div>
+
+<div>
+<button type="submit" class="btn btn-info">Confirm</button>
 </div>
 </div>
 </form>
