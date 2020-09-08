@@ -23,6 +23,17 @@ Route::get('/ui', function () {
 });
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('donars','DonarController');
+<<<<<<< HEAD
 Route::resource('/patients','PatientController');
 Route::resource('health_checks','HealthCheckController');
 Route::resource('records','RecordController');
+=======
+Route::resource('organizations','OrganizationController');
+Route::resource('admins','AdminController');
+Route::resource('members','MemberController');
+Route::resource('neededbloods','NeededBloodController');
+Route::resource('bloods','BloodController');
+Route::resource('hospitals','HospitalController');
+Route::resource('labs','LabController');
+Route::resource('accepts','AcceptController');
+>>>>>>> e80d5e232a238130e54b9a75ed39dc5354a26b22
