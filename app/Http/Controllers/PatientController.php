@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\donar;
+use App\patient;
+use App\blood;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-class DonarController extends Controller
+class PatientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +16,8 @@ class DonarController extends Controller
     public function index()
     {
         //
-        $donars=donar::all();
-        return view('donars.index',['donars'=>$donars]);
+        $patients=patient::get();
+        return view('Patients.index',['patients'=>$patients]);
     }
 
     /**
@@ -26,7 +28,8 @@ class DonarController extends Controller
     public function create()
     {
         //
-        return view('donar.create');
+        $bloods=blood::get();
+        return view('Patients.create',['bloods'=>$bloods]);
     }
 
     /**
@@ -36,18 +39,14 @@ class DonarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   $this->validate($request,['name'=>'required|max:255',]);
         //
-        $donars=new donar();
-        $donars->name = $request->name;
-        $donars->gender=$request->gender;
-        $donars->address=$request->address;
-        $donars->phone=$request->phone;
-        $donars->age=$request->age;
-        $donars->date_of_birth=$request->dob;
-        $donars->member=$request->member;
-        $donars->save();
-        return redirect()->action('/donars');
+        $patient= new patient();
+        $patient->name=$request->name;
+        $patient->phone=$request->phone;
+        $patient->bloods_id=$request->bloods_id;
+        $patient->save();
+        return redirect('/patients');
     }
 
     /**
@@ -70,6 +69,9 @@ class DonarController extends Controller
     public function edit($id)
     {
         //
+        $patient=patient::find($id);
+        $bloods=blood::get();
+        return view('Patients.edit',compact('patient','bloods'));
     }
 
     /**
@@ -82,6 +84,12 @@ class DonarController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $patient= patient::find($id);
+        $patient->name=$request->name;
+        $patient->phone=$request->phone;
+        $patient->bloods_id=$request->bloods_id;
+        $patient->save();
+        return redirect('/patients');
     }
 
     /**
@@ -93,5 +101,7 @@ class DonarController extends Controller
     public function destroy($id)
     {
         //
+        patient::findOrFail($id)->delete();
+        return redirect('patients');
     }
 }
